@@ -1,0 +1,19 @@
+# Large data files
+*.csv
+*.xlsx
+*.twbx
+*.twb
+
+# Python artifacts
+__pycache__/
+.venv/
+.ipynb_checkpoints/
+*.ipynb
+
+# Project plans and artifacts
+implementation_plan.md
+verify_implementation.py
+Final_Submission_Summary.txt
+*.html
+*.txt
+!submission.txt

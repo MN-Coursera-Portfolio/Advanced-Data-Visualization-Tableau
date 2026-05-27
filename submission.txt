@@ -1,0 +1,119 @@
+COURSERA FINAL PROJECT SUBMISSION - ADVANCED DATA VISUALIZATION WITH TABLEAU
+Learner Name: Coursera Learner
+
+PART 1: SHARE YOUR FINAL PROJECT WORKBOOK
+Task 1: Project Workbook Link
+Tableau Public Link: https://public.tableau.com/app/profile/coursera.learner/viz/NewYorkAirbnbPricingReport/Dashboard
+GitHub Repository Link: https://github.com/MN-Coursera-Portfolio/Advanced-Data-Visualization-Tableau
+
+PART 2: BUILDING HIERARCHIES
+Task 1: Neighbourhood Hierarchy
+Calculation Steps:
+1. In the Data pane, selected the 'Neighbourhood' field.
+2. Dragged 'Neighbourhood' and dropped it on 'Neighbourhood Group'.
+3. In the 'Create Hierarchy' dialog, entered the name "Neighbourhood Hierarchy".
+4. Verified that 'Neighbourhood Group' is at the top level and 'Neighbourhood' is at the second level.
+
+Task 2: Room Type Hierarchy
+Calculation Steps:
+1. Created a Calculated Field named "Room Category" with the following formula:
+   IF [Room Type] = 'Entire home/apt' THEN 'Entire Home/Apt'
+   ELSEIF [Room Type] = 'Private room' THEN 'Private Room'
+   ELSE 'Shared Room'
+   END
+2. Right-clicked 'Room Category' in the Data pane, selected Hierarchy -> Create Hierarchy.
+3. Named the hierarchy "Room Type Hierarchy".
+4. Added 'Room Type' and other relevant categorical fields to this hierarchy.
+
+PART 3: SIMPLE DATA MODELLING
+Task 1: Non-null Filtering
+Implementation Steps:
+1. Dragged 'Price' to the Filters shelf and selected "All values". In the Filter dialog, clicked 'Special' and selected 'Non-null values'.
+2. Repeated the process for 'Minimum Nights'.
+3. For 'Occupancy Rate' (created in Part 5), added it to the Filters shelf and filtered for non-null values to ensure data integrity.
+
+Task 2: Average Price per Night
+Calculation Steps:
+1. Created a Calculated Field named "Average Price per Night".
+2. Entered the formula: [Price] / [Minimum Nights]
+3. Changed the Default Properties -> Number Format to Currency (Standard).
+
+PART 4: CREATING BASIC VISUALIZATIONS
+Task 1: Line Chart (Price vs Reviews Per Month)
+Implementation:
+1. Dragged 'Reviews Per Month' to the Columns shelf.
+2. Dragged 'Price' to the Rows shelf.
+3. Changed the Mark type to 'Line'.
+4. Added 'Neighbourhood Group' to the Color mark to distinguish trends across areas.
+
+Task 2: Neighbourhood Map
+Implementation:
+1. Double-clicked 'Neighbourhood Group' and 'Neighbourhood' to generate the geographic view.
+2. Tableau automatically recognized the fields and plotted them on a map of New York City.
+3. Dragged 'Price' to the Size mark and 'Neighbourhood Group' to Color.
+
+Task 3: Bar Chart (Avg Price by Neighbourhood Group)
+Implementation:
+1. Dragged 'Neighbourhood Group' to the Columns shelf.
+2. Dragged 'Average Price per Night' to the Rows shelf.
+3. Set the aggregation to 'Average' (AVG).
+4. Sorted the bars in descending order to identify the most expensive groups.
+
+PART 5: LOD AND COMPLEX CALCULATIONS
+Task 1: Price Difference (LOD)
+Formula:
+[Price] - { FIXED [Neighbourhood] : AVG([Price]) }
+Explanation: This calculation subtracts the average price of all listings in a specific neighbourhood from the price of the individual listing, identifying which listings are priced above or below their local average.
+
+Task 2: Total Revenue
+Formula:
+[Price] * [Minimum Nights]
+Explanation: Estimates the potential revenue per booking based on the minimum required stay.
+
+Task 3: Occupancy Rate
+Formula:
+[Availability 365] / 365
+Explanation: Calculates the proportion of the year the listing is available, serving as a proxy for occupancy potential.
+
+PART 6: USING TOOLTIPS
+Task 1: Enhanced Tooltips
+Implementation:
+1. Opened the Map worksheet created in Part 4.
+2. Dragged 'Calculated Host Listings Count', 'Price Difference', 'Total Revenue', and 'Occupancy Rate' to the Tooltips mark.
+3. Edited the Tooltip text to be:
+   Neighbourhood: <Neighbourhood>
+   Host Listing Count: <Calculated Host Listings Count>
+   Price Difference: <Price Difference>
+   Total Revenue Estimate: <Total Revenue>
+   Occupancy Rate: <PERCENT(Occupancy Rate)>
+
+PART 7: CREATING A FINAL DASHBOARD
+Task 1: Dashboard Layout
+Arrangement:
+1. Created a new Dashboard and set the size to 'Automatic'.
+2. Placed the "Neighbourhood Map" in the top section.
+3. Placed the "Average Price per Night Bar Chart" at the bottom left.
+4. Added the "Price vs Reviews Line Chart" at the bottom right.
+
+Task 2: Annotations and Titles
+Implementation:
+1. Added a Main Title: "New York Airbnb Market Performance & Pricing Metrics".
+2. Added an annotation to the Manhattan cluster on the map highlighting it as the "High-Demand/High-Price Corridor".
+3. Labeled the Bar Chart as "Pricing Efficiency by Borough".
+
+PART 8: IMPLEMENTING DASHBOARD ACTIONS
+Task 1: Filter Action
+Implementation:
+1. Selected Dashboard -> Actions -> Add Action -> Filter.
+2. Source Sheet: "Bar Chart".
+3. Target Sheets: "Map" and others.
+4. Run action on: "Select".
+5. Target Filters: "Neighbourhood Group".
+
+Task 2: Highlight Action
+Implementation:
+1. Selected Dashboard -> Actions -> Add Action -> Highlight.
+2. Source Sheet: "Bar Chart".
+3. Target Sheets: "Map".
+4. Run action on: "Select".
+5. Target Highlighting: "Neighbourhood Group".
